@@ -1,0 +1,353 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   babysteps.txt                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 19:20:23 by shinckel          #+#    #+#             */
+/*   Updated: 2023/01/16 19:54:40 by shinckel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+STEP 0 -> Download Sebian amd64 (linux version)
+https://www.debian.org/CD/netinst/
+________________________________________________________________________________
+STEP 1 -> Virtual Machine settings
+
+theory 
+--------------------------------------------------------------------------------
+/virtual machine-> a computer inside a computer-> e.g. you have a computer...
+...with Windows OS but you want to work with Linux-> each has its own kernel/
+/it asks for the host machine ⇒ hey, can I borrow some storage for this guest...
+...machine? Can I use some of this CPU? Can I use some of your RAM?/
+/ORACLE VIRTUAL BOX-> It is a type 2 hyper vision -> the host OS is allowing... 
+...the guest OS to use its resources/
+/hyper vision-> it is a computer software-> hyper vision creates/runs a VM/
+/VIRTUALIZED HARDWARE RESOURCES-> abstract the hardware of a single computer/
+/creates the illusion that each environment is running its own private computer/
+/Hard disk file type-> Disk image files-> reside on the host system and are seen...
+by the guest as hard disks of a certain geometry, you can expand it after created/
+
+KERNEL
+/core program structured in modules(that can expand kernel capacibilities)->
+-> kernel tasks-> managing hard drives, network card, USB devices/
+/in orther for USB be operational-> kernel will load modules related to USB/
+kernel version-> terminal-> [uname -r]
+find all kernel in your machine/ dependecies-> [cd /lib/modules]-> [ls]-> 
+-> [cd 5.4.0-135-generic]-> [ls]
+
+View Disk Usage Linux-> manage directories using disk space-> [ncdu]
+navigate with arrows, delete with [d], exit with [q]
+--------------------------------------------------------------------------------
+
+actions(you must abstract the hardware of a single computer. how much?)
+--------------------------------------------------------------------------------
+VirtualBox-> new
+Name-> anything you want
+Machine Folder-> sgoinfre/
+Type-> Linux
+Version-> Debian 64-bit
+Continue...-> RAM 1024 MB-> Continue...-> Create virtual a hard disk now-> 
+-> Hard disk file type-> VDI(VirtualBox Disk Image)-> fixed size-> *8 GB 
+/*This size is the limit on the amount of file data that a virtual machine will...
+/...be able to store on the hard disk*/
+
+Settings-> Storage-> Controller: IDE-> Optical Drive: disk icon-> Choose a diskfile->
+-> your debian-xx-x-x-amd64-netinst.iso-> ok-> Start... 
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 2 -> Installation (...Start)
+
+theory
+--------------------------------------------------------------------------------
+/hostname-> identifies your system to the network/
+/domain name-> internet address(to the right of the hostname)/
+/user name created for non-administrative activities/
+--------------------------------------------------------------------------------
+
+actions(you must determine )
+--------------------------------------------------------------------------------
+Select start-up disk-> add-> debian-11.6.0-amd64-netinst.iso-> Start
+Install-> Not Graphical Install
+Choose language-> English
+
+Territory or area-> Choose yours(e.g.Other/Europe/Portugal)
+Select local available for the chosen language-> United States-> Configure the...
+...keyboard-> American English-> Wait
+
+Hostname-> yourintralogin42-> Domain name: leave empty-> Root password -> re-enter
+Set up user-> Full name-> your full name-> Username-> yourintralogin-> password->
+-> re-enter-> configure the clock-> Time zone: Lisbon-> Wait 
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 2.1 -> Partition setup
+
+theory
+--------------------------------------------------------------------------------
+/PARTITIONS-> it is a piece of a hard disk/
+/it will be often used "volumes" as a partition synonymous/
+/logical(a physical disk divided into pieces) and physical drives(the actual...
+...hard disk or SSD)-> so, a physical drive can have multiple different logical disks/
+/so, each partition is a separate logical drive on the single physical drive/
+/disk and drive are essentially the same thing/
+/partitions-> primary versus logical-> /
+
+LINUX FILE SYSTEM(how an individual computer organizes data?)
+/windows-> drive letters for accessing different partitions...
+...while in Linux everything is in the root file system...so everything is a file/
+/root user-> complete control over the system/
+/mount points-> mount hard drives in files/ folders-> *Obfuscation/
+/*in computer science, obfuscation is "security through obscurity"*/
+
+/root-> different from the file system root(~)-> this is the root home directory/
+/boot-> where the files live, where kernel needs/will boot the machine/
+/dev-> devices on the computer(e.g.keyboard, mouse, etc)/
+/dev/sda-> /
+/etc-> all sorts of configuration files for the system/
+/home-> it is where all user's files live-> separate hard drive(mounted to the...
+...system)-> comes up by default-> in the terminal, you open home automatically/
+/lib-> libraries, data used by programs in the computer/
+/media-> when you plug a USB it will mount up automatically in media-> it will...
+...show up on your desktop or dash/
+/opt-> where some programs are stored-> optional software/
+/tmp-> temporary files-> it is cleaned when you reboot your system/
+/var-> logs and system temporary files (e.g cache, backup)/
+/sbin-> binary code, computer commands/
+/usr-> universal system resources-> icons, things desktop uses, etc/
+/srv-> contains site-specific data which is served by this system/
+/EXT4-> journalism file system-> default file system for Linux distributions...
+...(Ubuntu and Debian)/
+/apt-> package manager/
+/*everything, except home, you will need administrator privileges*/
+
+/BIOS-> basic input/output system-> integrity check-> hardware/ operability/...
+...keyboard/ RAM-> independent of the operating system/ automatically when you...
+...turn on your computer-> the BIOS will boot the operating system/
+/it will look for a MBR(first drive sector)-> master boot record-> boot loader...
+and desk partitioning information-> LILO/ GRUB-> load kernel into memory/
+/kernel initialization-> core of the OS-> total control of OS-> systemd-> linux...
+processes, mount file systems-> it is the modern system and service manager/
+/boost-> /
+
+/hint-> "max" can be used as a shortcut to specify the maximum size, or enter a...
+...percentage (e.g. "20%") to use a percentage of the maximum size/
+
+HARDWARE
+/transistors-> turn on(1) off(0)-> binary language(base two, higher than one...
+...you need a second place)-> what pattern of bits to use for representing...
+higher notions as letters, words, etc?-> e.g. ASCII(mapping from decimals)/
+/CPU-> central processing unit-> golden pins connected to the motherboard/
+/Motherboard-> circuit board(silicon)-> there are sockets where CPU fits...
+the CPU is the brain, it does all the thinking-> inside the CPU there are cores/
+/Core-> more cores mean that you can do more operations at a time (e.i. many...
+programs running in parallel)-> more computational power-> Hyper-threading/
+/Hyper-threading-> for each processor core that is physically present, the...
+...OS addresses two virtual(logical) cores and shares the workload between them/ 
+/System-on-a-chip-> raw piece of hardware, full of ports, made of silicon/
+/Memory-> connected at the motherboard-> full of chips, storing data when...
+...power is on-> RAM-> random access memory-> electronic, electrons/
+/where should you store the long-last memory? when the computer is off?...
+...Hard Disk-> non volatile memory-> mechanical device(disks spinning)
+/Flash memory(SSD)-> non-volatile too-> electronic(so is faster...
+...as electrons run faster than disks), solid-state(no movement)/ 
+/Hybrid drives-> both solid state memory(SSD) + traditional hard disk/
+/USB sticks-> technology similar to flash memory/
+/trade-off-> velocity, reliability, space, cost/
+/funneling-> data needs to be closer to your computer's brain (CPU)...
+...hard disk(solid state, slower,GB/TB)-> RAM(faster, GB)->Level 3 Cache(MB)-> 
+-> Level 2 Cache(KB, MB)-> Level 1 Cache(KB)-> CPU(GHz)-> Registers(store values)
+-> The bottom of the funnel is more expensive!
+/Cache-> it is fed by RAM-> it is more close to CPU, as an intermediate...
+...so it is faster! information closer to CPU/
+/peripheral devices-> ports-> universal serial bus/ USB(where data can travel)/
+/How to assure that everything is working together? -> Operating System/
+
+OPERATING SYSTEM (intersection between hardware and software)
+/software installed in the hard disk-> when you turn on your computer, it will...
+be loaded from DISK to RAM and it is what you ultimately see/
+/knows how to talk, display, it moves things around(disk, RAM, etc)/
+
+ENCRYPTED VOLUMES (it is a software! it does the work of encryption)
+/why encryption-> layer of protection + TPM(adittion layer)-> for more security...
+file system level encription(partitions, it is on demand)/
+/what is the difference between partitioning and encrypted volumes?/
+/sometimes volume encryption is synonymous to-> partition or whole disk encryption/
+/but there are differences-> whole disk encryption-> encrypt all hard drive sections/
+/partition encryption-> more flexible way of encrypting data-> user can open and...
+get access to different encrypted partitions independently/
+/volume encryption-> you can combine several partitions(even stored in different...
+...physical hard drives)-> into a large "single" partition called VOLUME/
+/these volumes allow the user to-> create a larger single logical unit to store files,
+...store sensitive data more reliably, archieve higher performance/
+--------------------------------------------------------------------------------
+
+actions(with bonus)
+--------------------------------------------------------------------------------
+Partition method-> Manual-> SCSI3 (0,0,0)(sda)-8.6GB ATA VBOX HARDDISK-> Yes
+pri/log 8.6GB FREE SPACE-> Create a new partition-> 500M-> Primary-> Beginning->
+-> Mount Point-> Boot-> Done setting up the partition(DSUP)-> pri/log-> continue->
+-> Create a new partition-> 8.1GB or "max"-> Logical-> mount point->
+-> Do not mount it-> DSUP-> Configure encrypted volumes-> Yes->
+-> Create encrypted volumes-> /dev/sda5 (press space to choose it)-> DSUTP->
+-> Finish-> Yes-> Wait.
+
+Enter encryption passphrase twice-> Configure the Logical Volume Manager-> Yes->
+-> Create Volume Group-> LVMGroup-> press space on /dev/mapper/sda5_crypt->
+-> Continue-> Create Logical Volume(CLV)-> Next-> LVMGroup(LVMG)-> Next-> root(2G)
+CLV-> LVMG-> swap-> 1G
+CLV-> LVMG-> home-> 1G
+CLV-> LVMG-> var-> 1G
+CLV-> LVMG-> srv-> 1G
+CLV-> LVMG-> tmp-> 1G
+CLV-> LVMG-> var-log-> all disk space left-> Finish.
+
+/*here you will assign a partition(LVMGroup) to a mount point, SO PARTITIONS ARE...
+FORMATTED AS MOUNT POINTS! With an specific file system type*/
+Now you will see the window-> Partition Disks-> here, there are a lot of LVMGroup
+Go to first #1 998.2 MB (under home) for next steps-> Use as-> EXT4 jfs->
+Mount Point: -> /home-> Done setting up the partition(DSUP)
+root #1-> Use as-> EXT4-> MP-> / - the root fyle system-> DSUP   
+srv #1-> Use as-> EXT4-> MP-> /srv-> DSUP
+swap #1-> Use as-> swap area-> DSUP
+tmp #1-> Use as-> EXT4-> MP-> /tmp-> DSUP  
+var #1-> Use as-> EXT4-> MP-> /var-> DSUP
+var-log #1-> Use as-> EXT4-> MP-> Enter manually-> /var/log-> DSUP
+Scroll bellow-> Finish partitioning and write changes to the disk-> Yes.
+
+Wait.
+
+Now you will see the screen-> Configure the packager manager(Debian)-> No
+Debian archive mirror country-> Portugal-> deb.debian.org(doesn't matter)->
+-> Leave proxy info field empty-> Continue.  
+
+Participate in the package usage survey-> No.
+
+Software selection: remove selection from ssh/standard system utilities/etc.
+Install the GRUB boot loader-> Yes-> *dev/sda
+Installation complete-> Continue.
+/*remember-> dev/sda is the Hard Disk device(primary drive)*/
+
+Virtual Machine is ready.
+--------------------------------------------------------------------------------
+_________________________________________________________________________________
+STEP 3 -> Configure your machine.
+
+Actions
+---------------------------------------------------------------------------------
+Enter your LVM encryption passphrase to unlock the encrypted disk->
+-> log in into your user-> Now you will install necessary software/ configure it->
+-> configure it using a text editor (e.g. Nano, Vim)
+---------------------------------------------------------------------------------
+_________________________________________________________________________________
+STEP 3.1 -> Installing sudo ("super user do", security procedure)...
+and adding user in groups!
+
+theory
+--------------------------------------------------------------------------------
+/escalate privileges within the ubuntu server -> system modifications/
+/first account-> root user-> can do whatever the hell it wants to the OS/
+/ubuntu server-> it is a Linux distribution based on Debian and composed...
+...mostly of free and open-source software/
+/how to assure security when one account has the power to do anything?...
+...answer-> sudo command-> you can control and escalate your power to modify...
+...stuff depending on the demand!/
+
+apt versus aptitute
+
+--------------------------------------------------------------------------------
+
+Actions
+--------------------------------------------------------------------------------
+1) [su -] -> root password-> apt install sudo
+2) [$ adduser <yourusername> sudo] (yes, you shold be in root) 
+3) [$ sudo reboot]-> log in again
+4) [$ sudo -V]-> sudo version
+5) [$ sudo addgroup user42]-> user42 is the name of the group-> password
+6) [$ sudo adduser yourusername user42]
+7) [$ sudo apt update]-> debian package updated!
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 3.2 -> Installing SSH
+
+theory
+--------------------------------------------------------------------------------
+/SSH-> Secure Shell-> connecting to a remote machine through internet...
+...to encrypt data in network/
+//
+--------------------------------------------------------------------------------
+
+actions
+--------------------------------------------------------------------------------
+1) [$ sudo apt install openssh-server]-> Y
+2) [$ sudo nano /etc/ssh/sshd_config] -> change line "#Port 22" to "Port 4242"...
+...and "#PermitRootLogin prohibit-password" to "PermitRootLogin no"-> save exit
+3) [$ sudo service ssh status]-> it should be active.
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 3.3 -> Installing UFW
+
+theory
+--------------------------------------------------------------------------------
+/UFW stands for Uncomplicated Firewall-> available for Ubuntu and Debian/
+/firewall softwares-> it denies or allows access to particular network ports/
+/different network protocols require different ports-> allow or deny access...
+from the outside world to your network system/
+/firewall softwares-> certain IP addresses can have access to certain ports/
+/[sudo ufw allow from 10.0.1.19 to any port 22]/
+/by default it denies upcoming connections-> all network won't work/
+/[sudo ufw status verbose]/
+
+/FTP connection/
+
+/ports-> / 
+--------------------------------------------------------------------------------
+
+actions
+--------------------------------------------------------------------------------
+1) [$ sudo apt install ufw]
+2) [$ sudo ufw enable]
+3) [$ sudo ufw allow 4242]
+4) [$ sudo ufw status]-> it should be active with 4242 and 4242(v6) ports...
+...allow from anywhere
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 3.4 -> Configuring sudo
+
+theory
+--------------------------------------------------------------------------------
+/the action described bellow could be done through-> [sudo visudo]/
+--------------------------------------------------------------------------------
+
+actions
+--------------------------------------------------------------------------------
+1) [$ sudo touch /etc/sudoers.d/sudoconfig]
+2) [$ sudo mkdir /var/log/sudo]-> for sudo log files
+3) [$ sudo nano /etc/sudoers.d/sudoconfig]-> then, write next lines in your file
+
+
+Defaults	passwd_tries=3
+Defaults	badpass_message="Incorrect password"
+Defaults	log_input, log_output
+Defaults	iolog_dir="/var/log/sudo"
+Defaults	requiretty
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:
+/bin:/snap/bin"
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+STEP 3.5 -> Setting up a strong password policy
+
+theory
+--------------------------------------------------------------------------------
+PASS_MAX_DAYS-> maximum number of daysa password may be used
+PASS_MIN_DAYS-> minimum number of days allowed between changes
+pam_pwquality - PAM module to perform password quality checking
+plugin strength-checking for passwords(set of rules for identifying poor choices)
+--------------------------------------------------------------------------------
+
+actions
+--------------------------------------------------------------------------------
+1) 
+2)
+--------------------------------------------------------------------------------
+________________________________________________________________________________
