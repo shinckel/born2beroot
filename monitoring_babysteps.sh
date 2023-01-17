@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:57:16 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/17 18:08:51 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/17 18:20:15 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,4 +90,6 @@ wall " #Architecture: $arc
 
 #how to interrupt the script without modifying it?
 #[crontab]list of commands that you want to run on a regular schedule
-#
+#[sudo crontab -u root -e]
+#@reboot sleep 15; sh 
+#*/10 * * * *(script path)  
