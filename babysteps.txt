@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:20:23 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/17 11:54:23 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/18 18:10:29 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,6 +120,8 @@ LINUX FILE SYSTEM(how an individual computer organizes data?)
 /EXT4-> journalism file system-> default file system for Linux distributions...
 ...(Ubuntu and Debian)/
 /apt-> package manager/
+/pts/0-> pseudoterminal-> when you are virtually connected to the VM/
+/tty-> text input/output environment-> terminal-> inside the VM/
 /*everything, except home, you will need administrator privileges*/
 
 /BIOS-> basic input/output system-> integrity check-> hardware/ operability/...
@@ -348,8 +350,31 @@ plugin strength-checking for passwords(set of rules for identifying poor choices
 
 actions
 --------------------------------------------------------------------------------
-1) 
-2)
+1) [$ sudo nano /etc/login.defs]
+2) replace next lines:
+
+PASS_MAX_DAYS    99999 -> PASS_MAX_DAYS    30
+PASS_MIN_DAYS    0     -> PASS_MIN_DAYS    2
+
+PASS_WARN_AGE is 7 by defaults anyway so just ignore it.
+3) [$ sudo apt install libpam-pwquality]
+4) [$ sudo nano /etc/pam.d/common-password]
+5) Add to the end of the "password requisite pam_pwquality.so retry=3"-> minlen=10
+-> ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
+6) Now you must change all your passwords according to the new password policy
+7) [$ passwd]-> change user password
+8) [$ sudo passwd]-> change root password
+9) Shit happens...-> [$ sudo reboot]
 --------------------------------------------------------------------------------
 ________________________________________________________________________________
-sudo reboot
+STEP 4 -> Network adapter configuration
+
+actions
+--------------------------------------------------------------------------------
+1) Go to Oracle VM VirtualBox Manager
+2) Settings-> Network-> Adapter 1
+3) Change it to Bridged Adapter!
+--------------------------------------------------------------------------------
+________________________________________________________________________________
+CONCLUSION
+

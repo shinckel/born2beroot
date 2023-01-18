@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:57:16 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/17 18:20:15 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/18 18:18:33 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 #the architecture of your OS and its kernel version
 #variable=$(command output)
-arc=$(uname -m)
+arc=$(uname -a)
 
 #the number of physical processors[pseudo-file][/proc/cpuinfo]
 cpu=$(nproc --all)
@@ -34,10 +34,10 @@ ram=$(free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n",$3,$2,$3*100/$2}')
 #the current available memory on your server and its utilization rate(%)
 #[df -h]-> amount of disk space available | h stands for human-readable
 #if no file name is passed as argument-> space of all mounted file systems 
-disk=$(df -h | awk '$NF=="/"{printf "%s/%sGB (%s)\n",$3,$2,$5}')
+disk=$(df -h --total | awk 'NR==14{printf "%s/%s (%s)\n",$3,$2,$5}')
 
 #the current utilization rate of your processors(%)
-load=$(top -bn1 | grep load | awk '{printf "%.2f\n", $(NF-2)}')
+load=$(top -bn1 | grep '^%Cpu' | awk '{printf("%.1f%%"), $2}')
 
 #the date and time of the last reboot
 #[who -b]-> it displays the last system reboot date and time
@@ -46,9 +46,7 @@ boot=$(who -b | awk '{printf "%s %s\n",$3, $4}')
 #whether LVM is active or not
 #LVM-> Logical Volume Management-> system of partitions-> abstract your storage
 #Logical Volume is synonymous to Virtual/Logical Partition
-lvm=$(lsblk | grep "lvm" | awk '{if ($1) {printf "\033[0;32mYes\033";exit} else {printf 
-"\033[0;031mNo\033[0m";exit}}')
-
+lvm=$(lsblk | grep "lvm" | awk '{if ($1) {printf "Yes";exit} else {printf "No";exit}}')
 
 #the number of active connections
 #[netstat]-> Active Internet connections (servers and established)
@@ -92,4 +90,7 @@ wall " #Architecture: $arc
 #[crontab]list of commands that you want to run on a regular schedule
 #[sudo crontab -u root -e]
 #@reboot sleep 15; sh 
-#*/10 * * * *(script path)  
+#*/10 * * * *(script path)
+
+#[crontab -e]-> edit crontab
+#[]
