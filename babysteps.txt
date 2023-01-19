@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:20:23 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/18 18:10:29 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/19 17:26:48 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ theory
 --------------------------------------------------------------------------------
 /virtual machine-> a computer inside a computer-> e.g. you have a computer...
 ...with Windows OS but you want to work with Linux-> each has its own kernel/
-/it asks for the host machine ⇒ hey, can I borrow some storage for this guest...
+/it asks for the host machine-> hey, can I borrow some storage for this guest...
 ...machine? Can I use some of this CPU? Can I use some of your RAM?/
-/ORACLE VIRTUAL BOX-> It is a type 2 hyper vision -> the host OS is allowing... 
+/ORACLE VIRTUAL BOX-> It is a type 2 hyper vision-> the host OS is allowing... 
 ...the guest OS to use its resources/
 /hyper vision-> it is a computer software-> hyper vision creates/runs a VM/
 /VIRTUALIZED HARDWARE RESOURCES-> abstract the hardware of a single computer/
@@ -32,13 +32,25 @@ by the guest as hard disks of a certain geometry, you can expand it after create
 KERNEL
 /core program structured in modules(that can expand kernel capacibilities)->
 -> kernel tasks-> managing hard drives, network card, USB devices/
-/in orther for USB be operational-> kernel will load modules related to USB/
-kernel version-> terminal-> [uname -r]
+/in order for USB be operational-> kernel will load modules related to USB/
+kernel version-> terminal-> [uname -r][uname -a]
 find all kernel in your machine/ dependecies-> [cd /lib/modules]-> [ls]-> 
 -> [cd 5.4.0-135-generic]-> [ls]
 
 View Disk Usage Linux-> manage directories using disk space-> [ncdu]
 navigate with arrows, delete with [d], exit with [q]
+
+LINUX DISTRIBUTION
+/Debian-> easy interface, package management, stability/ reliability/ ...
+...security (used for critical infrastuctures)-> because of it sometimes...
+...releases can take too long(so you will be a few versions behind)/
+/Debian-> it doesn't have a massive company behind it-> no official support...
+...but lightweight, reliable and solid/
+/Ubuntu-> based on Debian-> [apt package] too-> but it adopts new releases faster/
+/Ubuntu is owned by a massive tech company-> Canonical(UK)-> user friendly...
+...Linux distribution/
+/Rocky-> free and open source-> business envionment-> compatible to Red Hat...
+...Enterprise Linux (but free)-> fewer updates, greater stability/
 --------------------------------------------------------------------------------
 
 actions(you must abstract the hardware of a single computer. how much?)
@@ -48,7 +60,7 @@ Name-> anything you want
 Machine Folder-> sgoinfre/
 Type-> Linux
 Version-> Debian 64-bit
-Continue...-> RAM 1024 MB-> Continue...-> Create virtual a hard disk now-> 
+Continue...-> RAM 1024 MB-> Continue...-> Create virtual hard disk now-> 
 -> Hard disk file type-> VDI(VirtualBox Disk Image)-> fixed size-> *8 GB 
 /*This size is the limit on the amount of file data that a virtual machine will...
 /...be able to store on the hard disk*/
@@ -66,7 +78,7 @@ theory
 /user name created for non-administrative activities/
 --------------------------------------------------------------------------------
 
-actions(you must determine )
+actions
 --------------------------------------------------------------------------------
 Select start-up disk-> add-> debian-11.6.0-amd64-netinst.iso-> Start
 Install-> Not Graphical Install
@@ -76,9 +88,9 @@ Territory or area-> Choose yours(e.g.Other/Europe/Portugal)
 Select local available for the chosen language-> United States-> Configure the...
 ...keyboard-> American English-> Wait
 
-Hostname-> yourintralogin42-> Domain name: leave empty-> Root password -> re-enter
+Hostname-> yourintralogin42-> Domain name: leave empty-> Root password-> re-enter
 Set up user-> Full name-> your full name-> Username-> yourintralogin-> password->
--> re-enter-> configure the clock-> Time zone: Lisbon-> Wait 
+->re-enter -> configure the clock-> Time zone: Lisbon-> Wait 
 --------------------------------------------------------------------------------
 ________________________________________________________________________________
 STEP 2.1 -> Partition setup
@@ -88,20 +100,20 @@ theory
 /PARTITIONS-> it is a piece of a hard disk/
 /it will be often used "volumes" as a partition synonymous/
 /logical(a physical disk divided into pieces) and physical drives(the actual...
-...hard disk or SSD)-> so, a physical drive can have multiple different logical disks/
+...hard disk or SSD)-> a physical drive can have multiple different logical disks/
 /so, each partition is a separate logical drive on the single physical drive/
 /disk and drive are essentially the same thing/
-/partitions-> primary versus logical-> /
 
 LINUX FILE SYSTEM(how an individual computer organizes data?)
 /windows-> drive letters for accessing different partitions...
 ...while in Linux everything is in the root file system...so everything is a file/
 /root user-> complete control over the system/
 /mount points-> mount hard drives in files/ folders-> *Obfuscation/
+/it is a directory/file at which a new file system/directory/file is made accessible/
 /*in computer science, obfuscation is "security through obscurity"*/
 
 /root-> different from the file system root(~)-> this is the root home directory/
-/boot-> where the files live, where kernel needs/will boot the machine/
+/boot-> where the files and kernel needs live/where kernal will boot the machine/
 /dev-> devices on the computer(e.g.keyboard, mouse, etc)/
 /dev/sda-> Disk1-> /dev/sdb-> Disk2/
 /dev/sda1 + /dev/sdb1-> /dev/MyVolGroup/-> Volume Group 1/
@@ -119,7 +131,11 @@ LINUX FILE SYSTEM(how an individual computer organizes data?)
 /srv-> contains site-specific data which is served by this system/
 /EXT4-> journalism file system-> default file system for Linux distributions...
 ...(Ubuntu and Debian)/
-/apt-> package manager/
+/apt-> package manager-> software installation and removal-> non-graphic...
+...command-line tool-> it is flexible(you can configure it!)-> Debian developers/
+/aptitude-> front-end tool that gives users access to the user-interface-> ...
+...Red-Hat developers-> [sudo apt install aptitude]/
+/both apt and aptitude-> packaging management/
 /pts/0-> pseudoterminal-> when you are virtually connected to the VM/
 /tty-> text input/output environment-> terminal-> inside the VM/
 /*everything, except home, you will need administrator privileges*/
@@ -131,7 +147,6 @@ LINUX FILE SYSTEM(how an individual computer organizes data?)
 and desk partitioning information-> LILO/ GRUB-> load kernel into memory/
 /kernel initialization-> core of the OS-> total control of OS-> systemd-> linux...
 processes, mount file systems-> it is the modern system and service manager/
-/boost-> /
 
 /hint-> "max" can be used as a shortcut to specify the maximum size, or enter a...
 ...percentage (e.g. "20%") to use a percentage of the maximum size/
@@ -173,7 +188,7 @@ be loaded from DISK to RAM and it is what you ultimately see/
 
 ENCRYPTED VOLUMES (it is a software! it does the work of encryption)
 /why encryption-> layer of protection + TPM(adittion layer)-> for more security...
-file system level encription(partitions, it is on demand)/
+...file system level encription(partitions, it is on demand)/
 /what is the difference between partitioning and encrypted volumes?/
 /sometimes volume encryption is synonymous to-> partition or whole disk encryption/
 /but there are differences-> whole disk encryption-> encrypt all hard drive sections/
@@ -187,13 +202,15 @@ get access to different encrypted partitions independently/
 
 actions(with bonus)
 --------------------------------------------------------------------------------
-Partition method-> Manual-> SCSI3 (0,0,0)(sda)-8.6GB ATA VBOX HARDDISK-> Yes
+Partition method-> Manual-> *SCSI3 (0,0,0)(sda)-8.6GB ATA VBOX HARDDISK-> Yes
 pri/log 8.6GB FREE SPACE-> Create a new partition-> 500M-> Primary-> Beginning->
 -> Mount Point-> Boot-> Done setting up the partition(DSUP)-> pri/log-> continue->
 -> Create a new partition-> 8.1GB or "max"-> Logical-> mount point->
 -> Do not mount it-> DSUP-> Configure encrypted volumes-> Yes->
 -> Create encrypted volumes-> /dev/sda5 (press space to choose it)-> DSUTP->
 -> Finish-> Yes-> Wait.
+
+/*so you are creating a new partition table on this device/
 
 Enter encryption passphrase twice-> Configure the Logical Volume Manager-> Yes->
 -> Create Volume Group-> LVMGroup-> press space on /dev/mapper/sda5_crypt->
@@ -206,7 +223,7 @@ CLV-> LVMG-> tmp-> 1G
 CLV-> LVMG-> var-log-> all disk space left-> Finish.
 
 /*here you will assign a partition(LVMGroup) to a mount point, SO PARTITIONS ARE...
-FORMATTED AS MOUNT POINTS! With an specific file system type*/
+FORMATTED AS MOUNT POINTS! With a specific file system type*/
 Now you will see the window-> Partition Disks-> here, there are a lot of LVMGroup
 Go to first #1 998.2 MB (under home) for next steps-> Use as-> EXT4 jfs->
 Mount Point: -> /home-> Done setting up the partition(DSUP)
@@ -226,13 +243,17 @@ Debian archive mirror country-> Portugal-> deb.debian.org(doesn't matter)->
 
 Participate in the package usage survey-> No.
 
-Software selection: remove selection from ssh/standard system utilities/etc.
-Install the GRUB boot loader-> Yes-> *dev/sda
+Software selection: remove selection from *ssh/standard system utilities/etc.
+Install the GRUB boot loader-> Yes-> **dev/sda
 Installation complete-> Continue.
-/*remember-> dev/sda is the Hard Disk device(primary drive)*/
+
+/*you are not installing this software. At this point, you could choose a... 
+...collection of software to install(as just the VMstructure is configurated),...
+...but you will do it manually later.*/
+/**remember-> dev/sda is the Hard Disk device(primary drive)*/
 
 Virtual Machine is ready.
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 _________________________________________________________________________________
 STEP 3 -> Configure your machine.
 
@@ -248,22 +269,19 @@ and adding user in groups!
 
 theory
 --------------------------------------------------------------------------------
-/escalate privileges within the ubuntu server -> system modifications/
+/escalate privileges within the debian/ubuntu server -> system modifications/
 /first account-> root user-> can do whatever the hell it wants to the OS/
 /ubuntu server-> it is a Linux distribution based on Debian and composed...
 ...mostly of free and open-source software/
 /how to assure security when one account has the power to do anything?...
 ...answer-> sudo command-> you can control and escalate your power to modify...
 ...stuff depending on the demand!/
-
-apt versus aptitute
-
 --------------------------------------------------------------------------------
 
 Actions
 --------------------------------------------------------------------------------
 1) [su -] -> root password-> apt install sudo
-2) [$ adduser <yourusername> sudo] (yes, you shold be in root) 
+2) [$ adduser <yourusername> sudo] (yes, you should be in root) 
 3) [$ sudo reboot]-> log in again
 4) [$ sudo -V]-> sudo version
 5) [$ sudo addgroup user42]-> user42 is the name of the group-> password
@@ -276,8 +294,10 @@ STEP 3.2 -> Installing SSH
 theory
 --------------------------------------------------------------------------------
 /SSH-> Secure Shell-> connecting to a remote machine through internet...
-...to encrypt data in network/
-//
+...to encrypt data in network-> encrypting the connection between 2 machines/
+/reliable transport between machines-> TCP/IP transmission control protocol->
+-> packets of data over the internet-> FTP file transfer protocol/
+[ssh shinckel@hostname -p 4242]-> do you want to trust this server and connect?
 --------------------------------------------------------------------------------
 
 actions
@@ -293,17 +313,20 @@ STEP 3.3 -> Installing UFW
 theory
 --------------------------------------------------------------------------------
 /UFW stands for Uncomplicated Firewall-> available for Ubuntu and Debian/
-/firewall softwares-> it denies or allows access to particular network ports/
+/firewall software-> it denies or allows access to particular network ports/
 /different network protocols require different ports-> allow or deny access...
 from the outside world to your network system/
-/firewall softwares-> certain IP addresses can have access to certain ports/
+/firewall software-> certain IP addresses can have access to certain ports/
 /[sudo ufw allow from 10.0.1.19 to any port 22]/
-/by default it denies upcoming connections-> all network won't work/
+/by default it denies upcoming connections-> all networks won't work/
 /[sudo ufw status verbose]/
 
-/FTP connection/
+SELinux
+/enforcing, permiting, disable-> default option is enforcing/
+/[sestatus]-> see if it is enabled/
 
-/ports-> / 
+APPArmor
+//
 --------------------------------------------------------------------------------
 
 actions
@@ -342,7 +365,7 @@ STEP 3.5 -> Setting up a strong password policy
 
 theory
 --------------------------------------------------------------------------------
-PASS_MAX_DAYS-> maximum number of daysa password may be used
+PASS_MAX_DAYS-> maximum number of days a password may be used
 PASS_MIN_DAYS-> minimum number of days allowed between changes
 pam_pwquality - PAM module to perform password quality checking
 plugin strength-checking for passwords(set of rules for identifying poor choices)
@@ -378,3 +401,11 @@ actions
 ________________________________________________________________________________
 CONCLUSION
 
+[$ sudo apt install net-tools]-> this will give access to important commands...
+...used in monitoring.sh!
+
+tip for last VM checkup-> [head -n 2 /etc/os-release]-> [/usr/sbin/aa-status]
+-> [ss-tunlp]-> [hostnamectl]
+tip2-> don't forget to clone your VM before the evaluation
+
+Now you are ready for writing the script in bash!

@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:57:16 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/18 18:18:33 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/19 17:29:59 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,9 +88,10 @@ wall " #Architecture: $arc
 
 #how to interrupt the script without modifying it?
 #[crontab]list of commands that you want to run on a regular schedule
-#[sudo crontab -u root -e]
-#@reboot sleep 15; sh 
-#*/10 * * * *(script path)
+#[crontab -e]-> edit crontab-> copy and paste after the last line
+#[@reboot sleep 10; sh /usr/local/bin/monitoring.sh]
+#[*/10 * * * * /usr/local/bin/monitoring.sh]
 
-#[crontab -e]-> edit crontab
-#[]
+#don't forget to change permissions-> [chmod 777 monitoring.sh]...
+#and to add at [sudo visudo]-> ...
+#...<youruser> ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh
