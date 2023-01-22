@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:57:16 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/19 17:29:59 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/22 17:57:13 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,6 @@ lvm=$(lsblk | grep "lvm" | awk '{if ($1) {printf "Yes";exit} else {printf "No";e
 tpc=$(netstat -an | grep ESTABLISHED | wc -l)
 
 #the number of users using the server
-#[tr]-> transform strings or delete characters from the string-> search/replace
 #[wc -w]-> word count words
 ulog=$(users | wc -w)
 
@@ -95,3 +94,4 @@ wall " #Architecture: $arc
 #don't forget to change permissions-> [chmod 777 monitoring.sh]...
 #and to add at [sudo visudo]-> ...
 #...<youruser> ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh
+#at [sudo visudo]-> add [<your_user> ALL=(ALL:ALL)ALL] too!
