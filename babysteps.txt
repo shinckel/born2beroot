@@ -6,7 +6,7 @@
 #    By: shinckel <shinckel@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 19:20:23 by shinckel          #+#    #+#              #
-#    Updated: 2023/01/22 17:53:46 by shinckel         ###   ########.fr        #
+#    Updated: 2023/01/22 17:59:06 by shinckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -407,13 +407,13 @@ CONCLUSION
 [$ sudo apt install net-tools]-> this will give access to important commands...
 ...used in monitoring.sh (e.g. journalctl)!
 
-tip for last VM checkup-> [head -n 2 /etc/os-release]-> [/usr/sbin/aa-status]
+tip1 for last VM checkup-> [head -n 2 /etc/os-release]-> [/usr/sbin/aa-status]
 -> [ss-tunlp]-> [hostnamectl]
 tip2 for changing hostname-> [hostnamectl set-hostname <newname>]
 tip3 for allowing a new port-> [sudo ufw allow 8080]-> [sudo ufw delete 8080]
 tip4-> when you finish everything (VM settings, monitoring.sh, crontab), copy...
 your VM signature-> [cd sgoinfree]-> [cd <VM_directory>] -> shasum "file.dvi"...
 ...copy only the number and submit it in 42 repo
-tip4-> don't forget to clone your VM before the evaluation!
+tip5-> don't forget to clone your VM before the evaluation!
 
 Now you are ready for writing the script in bash!
